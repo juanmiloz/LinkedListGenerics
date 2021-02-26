@@ -1,9 +1,9 @@
 package model;
 
 public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazadaOrdenada<T> { 
-	
+
 	private Nodo<T> first;
-	
+
 	public LinkedListOrdered() {
 		this.first = null;
 	}
@@ -30,7 +30,7 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 			}
 		}
 	}
-	
+
 	public void addOrdered(Nodo<T> current, T newOrdered) {
 		if(current.getElement().compareTo(newOrdered)>0 && current.getNext() == null) {
 			current.setNext(new Nodo<T>(newOrdered));
@@ -55,7 +55,7 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 			deleteElement(first, deleteElement);
 		}
 	}
-	
+
 	public void deleteElement(Nodo<T> current, T deleteElement) {
 		if(current.getNext().getElement().equals(deleteElement)) {
 			Nodo<T> temp = new Nodo<T>(deleteElement);
@@ -65,41 +65,68 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 			deleteElement(current.getNext(), deleteElement);
 		}
 	}
-	
+
 	@Override
 	public void deleteByPosition(int position) {
-		
+
 	}
 
 	@Override
 	public int getLength() {
 		int cont = 0;
-		if(first!=null) {
-			cont += 1;
-			cont += getLength(first);
-		}
-		return cont;
-	}
-	
-	public int getLength(Nodo<T> current) {
-		int cont = 0;
-		if(current.getNext()!= null) {
-			cont += 1;
-			cont += getLength(current.getNext());
+		Nodo<T>temp= first;
+		while(temp.getNext()!=null) {
+			cont++;
+			temp= temp.getNext();
 		}
 		return cont;
 	}
 
+	
+
 	@Override
-	public T getPositionElement(T element) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getPositionElement(T searchElement) {
+		int pos=0;
+
+		Nodo<T>temp= first;
+
+		while(!temp.getElement().equals(searchElement) && temp.getNext()!=null) {
+			pos++;
+			temp= temp.getNext();
+		}
+	
+		if(!temp.getElement().equals(searchElement)) {
+			pos=-1;
+		}
+		
+		return pos;
 	}
+
+
 
 	@Override
 	public T getElementByPosition(int position) {
+		T element = null;
 		
-		return null;
+		
+		if(position<0 || position> getLength()) {
+			element=null;
+		}else {
+			int cont=0;
+
+			Nodo<T>temp= first;
+			
+			while(cont<position) {
+				temp= temp.getNext();
+				cont++;
+			}
+			
+			element=temp.getElement();
+			
+		}
+	
+		
+		return element;
 	}
 
 	@Override
@@ -121,7 +148,7 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 		}
 		return message;
 	}
-		
+
 	public String showElements(Nodo<T> current, int cont) {
 		String message = "";
 		if(current != null) {
@@ -132,5 +159,5 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 		}
 		return message;
 	}
-	
+
 }

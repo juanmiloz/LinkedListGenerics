@@ -22,6 +22,7 @@ public class Main {
 		System.out.println("opciones: ");
 		System.out.println("(1)<--Agregar pruebas");
 		System.out.println("(2)<--Imprimir lista enlazada");
+		System.out.println("(3)<--Buscar Posición");
 		int option = Integer.parseInt(in.nextLine());
 		
 		switch(option) {
@@ -31,6 +32,10 @@ public class Main {
 			
 			case 2:
 				printList();
+			break;
+			
+			case 3:
+				//searchElemPosList();
 			break;
 				
 		}
@@ -48,9 +53,14 @@ public class Main {
 		linked.addOrdenered(p3);
 		linked.addOrdenered(p4);
 		linked.addOrdenered(p5);
+		//System.out.println(linked.getPositionElement(p1));
+		//System.out.println(linked.getLength());
+		//System.out.println(linked.getElementByPosition(1));
 	}
 	
 	public static void printList() {
 		System.out.println(linked.showElements());
 	}
+	
+	
 }
