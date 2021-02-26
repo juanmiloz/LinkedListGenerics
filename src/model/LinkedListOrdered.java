@@ -67,7 +67,44 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 	}
 
 	@Override
-	public void deleteByPosition(int position) {
+	public boolean deleteByPosition(int position) {
+		boolean success;
+
+
+		if(position<0 || position> getLength()) {
+			success=false;
+		}else {
+			
+
+			if(position==0) {
+				first=first.getNext();
+				success=true;
+			}else {
+				int cont=0;
+				Nodo<T>temp1= first;
+				Nodo<T>temp2= first;
+
+				while(cont<position && temp1.getNext()!=null) {
+					temp2=temp1;
+					temp1= temp1.getNext();
+					cont++;
+				}
+				
+				if(temp1.getNext()==null) {
+					temp2.setNext(null);
+					success=true;
+				}else {
+					temp2.setNext(temp1.getNext());
+					success=true;
+				}
+			
+			}
+
+		}
+
+
+		return success;
+
 
 	}
 
@@ -82,7 +119,7 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 		return cont;
 	}
 
-	
+
 
 	@Override
 	public int getPositionElement(T searchElement) {
@@ -94,11 +131,11 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 			pos++;
 			temp= temp.getNext();
 		}
-	
+
 		if(!temp.getElement().equals(searchElement)) {
 			pos=-1;
 		}
-		
+
 		return pos;
 	}
 
@@ -107,25 +144,25 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 	@Override
 	public T getElementByPosition(int position) {
 		T element = null;
-		
-		
+
+
 		if(position<0 || position> getLength()) {
 			element=null;
 		}else {
 			int cont=0;
 
 			Nodo<T>temp= first;
-			
+
 			while(cont<position) {
 				temp= temp.getNext();
 				cont++;
 			}
-			
+
 			element=temp.getElement();
-			
+
 		}
-	
-		
+
+
 		return element;
 	}
 
