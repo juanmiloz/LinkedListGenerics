@@ -1,47 +1,56 @@
 package ui;
+import java.util.Scanner;
+
 import model.*;
 
 public class Main {
 
+	private static Scanner in = new Scanner(System.in);
+	private static LinkedListOrdered<Prueba> linked = new LinkedListOrdered<>();
+	
 	public static void main(String[] args) {
+		boolean exit = true;
+		while(exit) {
+			menu();
+			System.out.println("regresar a menu?\n(1) si\n(2) No");
+			int answer = Integer.parseInt(in.nextLine());
+			exit = (answer == 1)?true:false;
+		}
+	}
+	
+	public static void menu() {
+		System.out.println("opciones: ");
+		System.out.println("(1)<--Agregar pruebas");
+		System.out.println("(2)<--Imprimir lista enlazada");
+		int option = Integer.parseInt(in.nextLine());
+		
+		switch(option) {
+			case 1:
+				addTest();
+			break;
+			
+			case 2:
+				printList();
+			break;
+				
+		}
+	}
+	
+	public static void addTest() {
 		Prueba p1 = new Prueba("ford","raptor",2018);
 		Prueba p2 = new Prueba("ford","fusion",2016);
 		Prueba p3 = new Prueba("kia","sportage",2017);
 		Prueba p4 = new Prueba("audi","R8",2021);
 		Prueba p5 = new Prueba("audi","A4",2018);
 		
-		LinkedListOrdered<Prueba> linked = new LinkedListOrdered<>();
-		
 		linked.addOrdenered(p1);
-		System.out.println(linked.getFirst().toString());
-		System.out.println("\n");
-		
 		linked.addOrdenered(p2);
-		System.out.println(linked.getFirst().toString());
-		System.out.println(linked.getFirst().getNext().toString());
-		System.out.println("\n");
-		
 		linked.addOrdenered(p3);
-		System.out.println(linked.getFirst().toString());
-		System.out.println(linked.getFirst().getNext().toString());
-		System.out.println(linked.getFirst().getNext().getNext().toString());
-		System.out.println("\n");
-		
 		linked.addOrdenered(p4);
-		System.out.println(linked.getFirst().toString());
-		System.out.println(linked.getFirst().getNext().toString());
-		System.out.println(linked.getFirst().getNext().getNext().toString());
-		System.out.println(linked.getFirst().getNext().getNext().getNext().toString());
-		System.out.println("\n");
-		
-		
 		linked.addOrdenered(p5);
-		System.out.println(linked.getFirst().toString());
-		System.out.println(linked.getFirst().getNext().toString());
-		System.out.println(linked.getFirst().getNext().getNext().toString());
-		System.out.println(linked.getFirst().getNext().getNext().getNext().toString());
-		System.out.println(linked.getFirst().getNext().getNext().getNext().getNext().toString());
-		System.out.println("\n");
-		
+	}
+	
+	public static void printList() {
+		System.out.println(linked.showElements());
 	}
 }

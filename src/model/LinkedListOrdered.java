@@ -47,9 +47,25 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 
 	@Override
 	public void deleteElement(T deleteElement) {
-		
+		if(first.getElement().equals(deleteElement)) {
+			Nodo<T> temp = new Nodo<T>(deleteElement);
+			temp.setNext(first.getNext());
+			first = temp;
+		}else {
+			deleteElement(first, deleteElement);
+		}
 	}
-
+	
+	public void deleteElement(Nodo<T> current, T deleteElement) {
+		if(current.getNext().getElement().equals(deleteElement)) {
+			Nodo<T> temp = new Nodo<T>(deleteElement);
+			temp.setNext(current.getNext().getNext());
+			current.setNext(temp);
+		}else {
+			deleteElement(current.getNext(), deleteElement);
+		}
+	}
+	
 	@Override
 	public void deleteByPosition(int position) {
 		
@@ -57,8 +73,21 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 
 	@Override
 	public int getLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		int cont = 0;
+		if(first!=null) {
+			cont += 1;
+			cont += getLength(first);
+		}
+		return cont;
+	}
+	
+	public int getLength(Nodo<T> current) {
+		int cont = 0;
+		if(current.getNext()!= null) {
+			cont += 1;
+			cont += getLength(current.getNext());
+		}
+		return cont;
 	}
 
 	@Override
@@ -75,22 +104,33 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 
 	@Override
 	public void deleteAll() {
-		
+		first = null;
 	}
 
 	@Override
 	public String showElements() {
-		/*
-		if(first != null) ;
-			System.out.println(first.toString());
-			System.out.println(first.toString());
-			System.out.println(first.toString());
+		String message = "";
+		int cont = 0;
+		if(first != null) {
+			cont += 1;
+			message += cont + "- ===============================================\n";
+			message += first.getElement().toString()+"\n";
+			message += showElements(first.getNext(),cont);
 		}else {
-			System.err.println("No hay");
-		}*/
-		return null;
+			message = "Lista vacia"; 
+		}
+		return message;
+	}
+		
+	public String showElements(Nodo<T> current, int cont) {
+		String message = "";
+		if(current != null) {
+			cont += 1;
+			message += cont + "- ===============================================\n";
+			message += current.getElement().toString()+"\n";
+			message += showElements(current.getNext(),cont);
+		}
+		return message;
 	}
 	
-	
-
 }
