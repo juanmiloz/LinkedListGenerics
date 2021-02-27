@@ -53,15 +53,16 @@ public class Main {
 		linked.addOrdenered(p3);
 		linked.addOrdenered(p4);
 		linked.addOrdenered(p5);
-		//System.out.println(linked.getPositionElement(p1));
+		//System.out.println(linked.getPositionElement(p4));
 		//System.out.println(linked.getLength());
 		//System.out.println(linked.getElementByPosition(1));
+		linked.deleteElement(p1);
 		
 	}
 	
 	public static void printList() {
 		System.out.println(linked.showElements());
-		//System.out.println(linked.deleteByPosition(3));
+		
 	}
 	
 	
