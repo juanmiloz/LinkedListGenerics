@@ -151,4 +151,21 @@ class ListaEnlazadaOrdenadaTest {
 		
 		assertNull(linked.getFirst());
 	}
+	
+	@Test
+	public void showElementsTest() {
+		LinkedListOrdered<Prueba> linked = new LinkedListOrdered<>();
+		linked.addOrdenered(p1);
+		linked.addOrdenered(p2);
+		
+		String info= 1 + "- ===============================================\n";
+		info += "marca: " + "ford" + " modelo: " + "fusion" + " año: " + 2016 +"\n";
+		info+= 2 + "- ===============================================\n";
+		info += "marca: " + "ford" + " modelo: " + "raptor" + " año: " + 2018 +"\n";
+		
+		
+		assertEquals(linked.showElements(), info);
+	}
+	
+	
 }
