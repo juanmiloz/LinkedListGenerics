@@ -46,24 +46,26 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 	}
 
 	@Override
-	public void deleteElement(T deleteElement) {
+	public boolean deleteElement(T deleteElement) {
+		boolean delete = false;
 		if(first.getElement().equals(deleteElement)) {
-			Nodo<T> temp = new Nodo<T>(deleteElement);
-			temp.setNext(first.getNext());
-			first = temp;
+			first = first.getNext();
+			delete = true;
 		}else {
-			deleteElement(first, deleteElement);
+			delete = deleteElement(first, deleteElement);
 		}
+		return delete;
 	}
 
-	public void deleteElement(Nodo<T> current, T deleteElement) {
-		if(current.getNext().getElement().equals(deleteElement)) {
-			Nodo<T> temp = new Nodo<T>(deleteElement);
-			temp.setNext(current.getNext().getNext());
-			current.setNext(temp);
-		}else {
-			deleteElement(current.getNext(), deleteElement);
+	public boolean deleteElement(Nodo<T> current, T deleteElement) {
+		boolean delete = false;
+		if(current.getNext() != null && current.getNext().getElement().equals(deleteElement)) {
+			current.setNext(current.getNext().getNext());
+			delete = true;
+		}else if(current.getNext() != null){
+			delete = deleteElement(current.getNext(), deleteElement);
 		}
+		return delete;
 	}
 
 	@Override
@@ -112,7 +114,7 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 	public int getLength() {
 		int cont = 0;
 		Nodo<T>temp= first;
-		while(temp.getNext()!=null) {
+		while(temp!=null) {
 			cont++;
 			temp= temp.getNext();
 		}
@@ -146,7 +148,7 @@ public class LinkedListOrdered<T extends Comparable<T>> implements ListaEnlazada
 		T element = null;
 
 
-		if(position<0 || position> getLength()) {
+		if(position<0 || position>= getLength()) {
 			element=null;
 		}else {
 			int cont=0;
